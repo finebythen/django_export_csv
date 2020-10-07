@@ -1,0 +1,139 @@
+{% load widget_tweaks %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Load Styles -->
+        <link href="https:fonts.googleapis.com/css?family=Lora|Ubuntu:300,400,700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/2cb2dfec48.js" crossorigin="anonymous"></script>
+        <!--Chart js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <title>Django | Widget Tweaks Forms</title>
+
+        <style>
+            /* ==========================
+             Inputfields
+             ========================== */
+
+            .inputfields {
+                display: flex;
+                flex-direction: column;
+                width: 400px;
+                text-align: left;
+                padding: 0 .5rem;
+            }
+
+            .text-muted {
+                color: #000;
+                font-size: .75rem;
+                font-weight: 700;
+                font-family: 'Lora', serif;
+            }
+
+            .inputfields input,
+            .inputfields select {
+                font-size: 1rem;
+                border: 0.125rem solid #aaa;
+                border-radius: 0.25rem;
+                margin: 0.5rem 0;
+                outline: none;
+                padding: 0.5rem;
+                box-sizing: border-box;
+                transition: .3s;
+            }
+
+            .inputfields input:focus,
+            .inputfields select:focus {
+                border-color: #518330;
+                box-shadow: 0 0 0.5rem 0 #518330;
+            }
+
+            /* ==========================
+             Buttons
+             ========================== */
+
+            .button-coworker button {
+                background: none;
+                color: #000;
+                width: 15rem;
+                height: 2.5rem;
+                border: 1px solid #338033;
+                font-size: 1rem;
+                border-radius: .25rem;
+                transition: .6s;
+                overflow-hidden;
+                margin: 1rem;
+            }
+
+            .button-coworker button:focus {
+                outline: none;
+            }
+
+            .button-coworker button:hover {
+                background: #338033;
+                transform:scale(1.15,1.15);
+                -webkit-transform:scale(1.15,1.15);
+                -moz-transform:scale(1.15,1.15);
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .button-coworker button:hover::before {
+                transform: translateX(18.75rem) skewX(-15deg);
+                opacity: .6;
+                transition: .7s;
+            }
+
+            .button-coworker button:hover::after {
+                transform: translateX(18.75rem) skewX(-15deg);
+                opacity: 1;
+                transition: .7s;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Widget Tweaks Forms!</h3>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            <div class="inputfields">
+                <small class="form-text text-muted">Vorname</small>
+                {% render_field formset.first_name class="form-control" placeholder="..." %}
+            </div>
+
+            <div class="inputfields">
+                <small class="form-text text-muted">Nachname</small>
+                {% render_field formset.last_name class="form-control" placeholder="..." %}
+            </div>
+
+            <div class="inputfields">
+                <small class="form-text text-muted">E-Mail-Adresse</small>
+                {% render_field formset.mail class="form-control" placeholder="..." %}
+            </div>
+
+            <div class="inputfields">
+                <small class="form-text text-muted">Alter</small>
+                {% render_field formset.age class="form-control" %}
+            </div>
+
+            <div class="inputfields">
+                <small class="form-text text-muted">Geburtsdatum</small>
+                {% render_field formset.birth_date class="form-control" type="date" placeholder="DD.MM.YYYY" %}
+<!--                <input type="date" value="{{ formset.birth_date }}">-->
+            </div>
+
+            <div class="button-coworker">
+                <button type="submit" class="btn-simple-search">Speichern</button>
+            </div>
+
+        </form>
+    </body>
+</html>
